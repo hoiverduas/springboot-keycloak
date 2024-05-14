@@ -10,26 +10,24 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
 
+
 @RestController
-//@RequestMapping("/tests")
+@RequestMapping("/test")
 public class TestController {
 
+    @GetMapping("/anonymous")
+    public ResponseEntity<String> getAnonymous() {
+        return ResponseEntity.ok("Hello Anonymous");
+    }
 
-        @GetMapping("/anonymous")
-        public ResponseEntity<String> getAnonymous() {
-            return ResponseEntity.ok("Hello Anonymous");
-        }
-        @PreAuthorize("hasAnyAuthority('ROLE_admin')")
-        @GetMapping("/admin")
-        public ResponseEntity<String> getAdmin() {
-            return ResponseEntity.ok("Hello Admin");
-        }
+    @GetMapping("/admin")
+    public ResponseEntity<String> getAdmin() {
+        return ResponseEntity.ok("Hello Admin");
+    }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_user', 'ROLE_admin')")
-        @GetMapping("/user")
-        public ResponseEntity<String> getUser(Principal principal) {
-            return ResponseEntity.ok("Hello User ");
+    @GetMapping("/user")
+    public ResponseEntity<String> getUser(Principal principal) {
+        return ResponseEntity.ok("Hello User ");
 
-        }
-
+    }
 }
